@@ -1,0 +1,29 @@
+/* Add your custom CSS styles here */
+/* Example: .dark-mode { background-color: #333; color: #fff; } */
+
+/* Default (Light) Mode Styles */
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #000; /* Set the background to black */
+    color: var(--text-light);
+}
+
+/* Table Styles for Dark Mode */
+body.dark-mode table {
+    background-color: var(--table-bg-dark);
+    color: var(--table-text-light);
+}
+
+/* CSS Variables */
+:root {
+    --bg-dark: #333;
+    --text-light: #fff;
+    --table-bg-dark: #1c1c1c; /* Dark table background color */
+    --table-text-light: #fff; /* Light text color for the table */
+    /* Add more variables for common styles here */
+}
