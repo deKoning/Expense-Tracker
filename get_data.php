@@ -2,41 +2,43 @@
 if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
     $startDate = $_GET['start_date'];
     $endDate = $_GET['end_date'];
-    
-    // Initialize variables for data retrieval
+
+    // Read the CSV file and filter data within the date range
+    $csvData = array_map('str_getcsv', file('expenses.csv'));
     $labels = [];
-    $incomeData = [];
-    $expenseData = [];
+    $incomePercentages = [];
+    $expensePercentages = [];
+
     $totalIncome = 0;
     $totalExpense = 0;
 
-    // Open the CSV file for reading
-    if (($handle = fopen('expenses.csv', 'r')) !== false) {
-        while (($row = fgetcsv($handle)) !== false) {
-            $date = $row[0];
-            if ($date >= $startDate && $date <= $endDate) {
-                $labels[] = $date;
-                $income = floatval($row[1]);
-                $expense = floatval($row[2]);
-                $incomeData[] = $income;
-                $expenseData[] = $expense;
-                $totalIncome += $income;
-                $totalExpense += $expense;
-            }
+    foreach ($csvData as $row) {
+        $date = $row[0];
+        if ($date >= $startDate && $date <= $endDate) {
+            $labels[] = $date;
+            $income = floatval($row[1]);
+            $expense = floatval($row[2]);
+            $totalIncome += $income;
+            $totalExpense += $expense;
+
+            // Calculate income and expense percentages
+            $incomePercentage = ($income / ($totalIncome + $totalExpense)) * 100;
+            $expensePercentage = ($expense / ($totalIncome + $totalExpense)) * 100;
+
+            $incomePercentages[] = round($incomePercentage, 2);
+            $expensePercentages[] = round($expensePercentage, 2);
         }
-        fclose($handle);
     }
 
     $data = [
         'labels' => $labels,
-        'incomeData' => $incomeData,
-        'expenseData' => $expenseData,
-        'totalIncome' => $totalIncome,
-        'totalExpense' => $totalExpense
+        'incomePercentages' => $incomePercentages,
+        'expensePercentages' => $expensePercentages,
+        'totalIncome' => round($totalIncome, 2),
+        'totalExpense' => round($totalExpense, 2)
     ];
 
     // Return data in JSON format
-    header('Content-Type: application/json');
     echo json_encode($data);
 }
 ?>
