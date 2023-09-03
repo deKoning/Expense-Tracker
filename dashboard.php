@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <div class="container mt-4">
         <h1>Expense Dashboard</h1>
         
         <!-- Navigation Button (Link to other pages) -->
-        <a href="other_page.php" class="btn btn-primary">Other Page</a>
+        <a href="./" class="btn btn-primary"><i class="fa-solid fa-left-long"></i> Back to home</a>
 
         <!-- Date Range Input Fields -->
         <div class="row mt-4">
@@ -27,9 +29,7 @@
             <div class="col-md-3">
                 <button class="btn btn-primary" id="update_graph">Update Graph</button>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-secondary" id="one_month">1 Month</button>
-            </div>
+ 
         </div>
 
         <!-- Buttons to Pre-fill Date Range -->
@@ -39,6 +39,9 @@
             </div>
             <div class="col-md-3">
                 <button class="btn btn-secondary" id="one_week">1 Week</button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-secondary" id="one_month">1 Month</button>
             </div>
             <div class="col-md-3">
                 <button class="btn btn-secondary" id="one_year">1 Year</button>

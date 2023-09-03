@@ -157,32 +157,37 @@
 
         // New downloadCSV function
         function downloadCSV() {
-            // Read the CSV data from the server
-            $.ajax({
-                url: 'download.php', // Create a new PHP script for downloading CSV
-                type: 'GET',
-                success: function (data) {
-                    // Create a Blob containing the CSV data
-                    const blob = new Blob([data], { type: 'text/csv' });
+    // Read the CSV data from the server
+    $.ajax({
+        url: 'download.php',
+        type: 'GET',
+        success: function (data) {
+            // Generate a unique filename with the current date and time
+            const currentDateTime = new Date().toISOString().replace(/[-:.]/g, "");
+            const filename = `expenses_${currentDateTime}.csv`;
 
-                    // Create a temporary URL for the Blob
-                    const url = window.URL.createObjectURL(blob);
+            // Create a Blob containing the CSV data
+            const blob = new Blob([data], { type: 'text/csv' });
 
-                    // Create a hidden <a> element for downloading
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'expenses.csv';
+            // Create a temporary URL for the Blob
+            const url = window.URL.createObjectURL(blob);
 
-                    // Trigger a click event on the <a> element to start the download
-                    a.style.display = 'none';
-                    document.body.appendChild(a);
-                    a.click();
+            // Create a hidden <a> element for downloading
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename; // Use the generated filename
 
-                    // Clean up by revoking the Blob URL
-                    window.URL.revokeObjectURL(url);
-                }
-            });
+            // Trigger a click event on the <a> element to start the download
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up by revoking the Blob URL
+            window.URL.revokeObjectURL(url);
         }
+    });
+}
+
 
         </script>
 
@@ -312,10 +317,10 @@
 
 
         <!-- Remove Selected Button -->
-        <button type="button" class="btn btn-danger mt-2" onclick="removeSelectedExpenses()">Remove Selected</button>
+        <button type="button" class="btn btn-danger mt-2" onclick="removeSelectedExpenses()"><i class="fa-solid fa-trash-can"></i> Remove Selected</button>
 
         <!-- Export CSV file and provide as download -->
-        <button type="button" class="btn btn-secondary mt-2" onclick="downloadCSV()">Download CSV</button>
+        <button type="button" class="btn btn-secondary mt-2" onclick="downloadCSV()"><i class="fa-solid fa-floppy-disk"></i> Download CSV</button>
 
         <!-- Button to navigate to graph.php -->
         <a href="dashboard.php" class="btn btn-secondary mt-2"><i class="fa-solid fa-chart-simple fa-shake"></i> Go to Dashboard</a>
