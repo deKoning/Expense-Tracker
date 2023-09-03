@@ -318,7 +318,7 @@
         <button type="button" class="btn btn-secondary mt-2" onclick="downloadCSV()">Download CSV</button>
 
         <!-- Button to navigate to graph.php -->
-        <a href="graph.php" class="btn btn-secondary mt-2"><i class="fa-solid fa-chart-simple fa-shake"></i> Go to Graph</a>
+        <a href="dashboard.php" class="btn btn-secondary mt-2"><i class="fa-solid fa-chart-simple fa-shake"></i> Go to Dashboard</a>
 
         <!-- Sort Buttons with Icons
         <div class="mt-2">
